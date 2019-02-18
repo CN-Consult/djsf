@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.2.0",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.3.0",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -291,6 +291,17 @@
 							"description": "The number of the next train in case the train returns as another train number. This can be used to directly select the next train when the train arrives at its destination station.",
 							"id": "#nextTrainNumber",
 							"required":false
+						},
+						"multiTractionTrains" : {
+							"type":"array",
+							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train.",
+							"id": "#multiTractionTrains",
+							"required":false,
+							"minitems": 0,
+							"items":[{
+								"type":"object",
+								"$ref":"#/definitions/multiTractionTrains"
+							}]
 						}
 					}
 				}
@@ -456,6 +467,32 @@
 					"type":"number",
 					"description": "The sequence number of the station on the route.",
 					"id": "#sequenceNumber",
+					"required":true
+				}
+			}
+		},
+		"multiTractionTrains": {
+			"type": "object",
+			"id": "#multiTractionTrains",
+			"description": "",
+			"required": false,
+			"properties": {
+				"number": {
+					"type":"string",
+					"description": "The number of the train. This may contain alphanumeric symbols and dots.",
+					"id": "#number",
+					"required":true
+				},
+				"piNumber": {
+					"type":"string",
+					"description": "The pi number of the train. This may contain alphanumeric symbols and dots.",
+					"id": "#piNumber",
+					"required":true
+				},
+				"arrivalStationIdCode": {
+					"type":"string",
+					"description": "The id code of the arrival station of this multitraction partner train.",
+					"id": "#arrivalStationIdCode",
 					"required":true
 				}
 			}

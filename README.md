@@ -30,3 +30,6 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Added optional 'timeoffset' parameter. 
 - **v2.2.0** 
     - Added piNumber to trains
+- **v2.3.0** 
+    - Added support for multitraction trains.
+        
