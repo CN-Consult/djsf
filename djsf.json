@@ -294,7 +294,7 @@
 						},
 						"multiTractionTrains" : {
 							"type":"array",
-							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train.",
+							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train. The order of the trains in the array defines the order of trains in the multitraction.",
 							"id": "#multiTractionTrains",
 							"required":false,
 							"minitems": 0,
