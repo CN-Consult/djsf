@@ -32,4 +32,6 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Added piNumber to trains
 - **v2.3.0** 
     - Added support for multitraction trains.
-        
+- **v2.3.1** 
+    - Specified timeTableArrivalTime and timeTableDepartureTime more precise.
+                
