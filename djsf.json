@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.3.0",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.3.1",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -185,13 +185,13 @@
 										},
 										"timeTableArrivalTime": {
 											"type":"number",
-											"description": "The time table arrival time in seconds after the departure of the train.",
+											"description": "The time table arrival time in seconds after the departure of the train. The order of the routeStations must be ascending over timeTableArrivalTime.",
 											"id": "#timeTableArrivalTime",
 											"required":false
 										},
 										"timeTableDepartureTime": {
 											"type":"number",
-											"description": "The time table departure time in seconds after the departure of the train.",
+											"description": "The time table departure time in seconds after the departure of the train. If stopType equals 'passthrough' the timeTableDepartureTime must be the same like timeTableArrivalTime.",
 											"id": "#timeTableDepartureTime",
 											"required":false
 										}
