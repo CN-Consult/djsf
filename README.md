@@ -34,4 +34,6 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Added support for multitraction trains.
 - **v2.3.1** 
     - Specified timeTableArrivalTime and timeTableDepartureTime more precise.
+- **v2.3.2** 
+    - Fixed enum value for period schedule
                 
