@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.3.1",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.3.2",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -33,8 +33,8 @@
 					"description":"The version describes the djsf schema version of the generated schedule."
 				},
 				"type": {
-					"enum":["year","day"],
-					"description": "The type of the generated schedule (\"year\" or \"day\").",
+					"enum":["period","day"],
+					"description": "The type of the generated schedule (\"period\" or \"day\").",
 					"id": "#scheduletype",
 					"required":true
 				}
@@ -274,7 +274,7 @@
 						},
 						"travelsOnDays": {
 							"type":"array",
-							"description": "This defines on which days the train travels. This only applies for year schedules. On day schedules only the trains that really travel on the day are included in the schedule.",
+							"description": "This defines on which days the train travels. This only applies for period schedules. On day schedules only the trains that really travel on the day are included in the schedule.",
 							"id": "#travelsOnDays",
 							"required":false,
 							"items":
