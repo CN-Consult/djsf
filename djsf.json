@@ -178,7 +178,7 @@
 											"$ref":"#/definitions/routeStationIdentifier"
 										},
 										"stopType": {
-											"enum":["departure","conditionalHalt","passthrough","technical","exitOnly","arrival"],
+											"enum":["departure","conditionalHalt","passthrough","technical","exitOnly","arrival", "halt"],
 											"description": "The type of the stop.",
 											"id": "#stopType",
 											"required":true
@@ -291,6 +291,17 @@
 							"description": "The number of the next train in case the train returns as another train number. This can be used to directly select the next train when the train arrives at its destination station.",
 							"id": "#nextTrainNumber",
 							"required":false
+						},
+						"nextTrainLinkType": {
+							"type":"array",
+							"description": "Defines the link type of two train numbers.",
+							"id": "#nextTrainLinkType",
+							"required":false,
+							"items": {
+								"enum":["circular", "continuation"],
+								"description": "Circular defines the link type for regular circulation trips. Continuation defines a link type for a train which does not circulate at the destination station.",
+								"required":false
+							}
 						},
 						"multiTractionTrains" : {
 							"type":"array",
