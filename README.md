@@ -39,9 +39,12 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Spezifikation für timeTableArrivalTime timeTableDepartureTime angepasst. 
 - **v2.3.2** 
     - Enum-Wert für Jahresfahrplan behoben. 
- - **v2.4.0** 
-    - Unterstützung des Zug-Verbindungstyps 'Durchbinden' hinzugefügt.                 
-    
+- **v2.4.0** 
+    - Unterstützung des Zug-Verbindungstyps 'Durchbinden' hinzugefügt.                  
+- **v2.4.1** 
+    - 'train' aus nextTrainNumber und nextTrainLinkType entfernt, weil es redundant ist.
+    - nextPiNumber hinzugefügt                 
+         
 ### English
 - **v0.1.1**
     - Initial version.
@@ -75,5 +78,8 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Specified timeTableArrivalTime and timeTableDepartureTime more precise.
 - **v2.3.2**  
     - Fixed enum value for period schedule
- - **v2.4.0** 
+- **v2.4.0** 
     - Added support for train link type 'continuation'.                 
+- **v2.4.1** 
+    - removed 'train' from nextTrainNumber and nextTrainLinkType because it is redundant
+    - added nextPiNumber 
