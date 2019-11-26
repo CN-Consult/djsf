@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.4",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.4.1",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -286,16 +286,22 @@
 
 
 						},
-						"nextTrainNumber": {
+						"nextNumber": {
 							"type":"string",
-							"description": "The number of the next train in case the train returns as another train number. This can be used to directly select the next train when the train arrives at its destination station.",
-							"id": "#nextTrainNumber",
+							"description": "The number of the next train in case the train returns as another train number. This can be used to directly select the next train when the train arrives at its destination station. This can also be used to define a continuation, when another train number continue the trip.",
+							"id": "#nextNumber",
 							"required":false
 						},
-						"nextTrainLinkType": {
+                        "nextPiNumber": {
+                          "type":"string",
+                          "description": "The pi number of the next train.",
+                          "id": "#nextPiNumber",
+                          "required":false
+                        },
+						"nextLinkType": {
 							"type":"array",
 							"description": "Defines the link type of two train numbers.",
-							"id": "#nextTrainLinkType",
+							"id": "#nextLinkType",
 							"required":false,
 							"items": {
 								"enum":["circular", "continuation"],
