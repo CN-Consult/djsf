@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.4.1",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.4.2",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -37,6 +37,12 @@
 					"description": "The type of the generated schedule (\"period\" or \"day\").",
 					"id": "#scheduletype",
 					"required":true
+				},
+				"createdAt": {
+					"type":"string",
+					"format":"date-time",
+					"required":true,
+					"description": "The timestamp when the schedule is created in ISO-8601 format. For example: 2022-12-02T10:20:39+00:00"
 				}
 			}
 		},

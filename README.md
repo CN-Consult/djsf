@@ -43,7 +43,9 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Unterstützung des Zug-Verbindungstyps 'Durchbinden' hinzugefügt.                  
 - **v2.4.1** 
     - 'train' aus nextTrainNumber und nextTrainLinkType entfernt, weil es redundant ist.
-    - nextPiNumber hinzugefügt                 
+    - nextPiNumber hinzugefügt  
+- **v2.4.2**
+    - createdAt für Erzeugungszeitpunkt des Fahrplans hinzugefügt.
          
 ### English
 - **v0.1.1**
@@ -83,3 +85,5 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
 - **v2.4.1** 
     - removed 'train' from nextTrainNumber and nextTrainLinkType because it is redundant
     - added nextPiNumber 
+- **v2.4.2**
+    - Added 'createdAt' which represents the generation timestamp of the schedule.
