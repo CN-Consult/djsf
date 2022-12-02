@@ -38,10 +38,11 @@
 					"id": "#scheduletype",
 					"required":true
 				},
-				"timestamp": {
+				"createdAt": {
 					"type":"string",
+					"format":"date-time",
 					"required":true,
-					"description": "The timestamp when the period schedule is generated."
+					"description": "The timestamp when the schedule is created in ISO-8601 format. For example: 2022-12-02T10:20:39+00:00"
 				}
 			}
 		},

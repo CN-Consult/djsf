@@ -45,7 +45,7 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - 'train' aus nextTrainNumber und nextTrainLinkType entfernt, weil es redundant ist.
     - nextPiNumber hinzugefügt  
 - **v2.4.2**
-    - timestamp hinzugefügt für neu generiert Jahresfahrplan.
+    - createdAt für Erzeugungszeitpunkt des Fahrplans hinzugefügt.
          
 ### English
 - **v0.1.1**
@@ -86,4 +86,4 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - removed 'train' from nextTrainNumber and nextTrainLinkType because it is redundant
     - added nextPiNumber 
 - **v2.4.2**
-    - added 'timestamp' for the new generated period schedule.
+    - Added 'createdAt' which represents the generation timestamp of the schedule.
