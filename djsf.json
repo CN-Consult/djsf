@@ -43,6 +43,11 @@
 					"format":"date-time",
 					"required":true,
 					"description": "The timestamp when the schedule is created in ISO-8601 format. For example: 2022-12-02T10:20:39+00:00"
+				},
+				"fileDownloadUrl": {
+					"type":"string",
+					"required":false,
+					"description": "The URL with path to the API endpoint to download schedule audio files"
 				}
 			}
 		},
