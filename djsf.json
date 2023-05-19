@@ -47,7 +47,7 @@
 				"fileDownloadUrl": {
 					"type":"string",
 					"required":false,
-					"description": "The URL with path to the API endpoint to download schedule audio files"
+					"description": "The URL with path to the API endpoint to download schedule audio files. The file path and mpi device id code are added as query parameter. Example: https://onboard.diloc.de/capsules/fleetmanager/getScheduleAudioFile/?filePath=abc/a.mp3&mpiDeviceIdCode=test"
 				}
 			}
 		},
