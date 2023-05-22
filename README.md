@@ -46,6 +46,8 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - nextPiNumber hinzugefügt  
 - **v2.4.2**
     - createdAt für Erzeugungszeitpunkt des Fahrplans hinzugefügt.
+- **v2.4.3**
+    - 'fileDownloadUrl' in meta daten hinzugefügt
          
 ### English
 - **v0.1.1**
@@ -87,3 +89,5 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - added nextPiNumber 
 - **v2.4.2**
     - Added 'createdAt' which represents the generation timestamp of the schedule.
+- **v2.4.3**
+    - Added 'fileDownloadUrl' to meta data
