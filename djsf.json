@@ -112,6 +112,20 @@
 							"id": "#departureTime",
 							"required":true
 						},
+						"product": {
+							"type":"object",
+							"description": "The product information about a train.",
+							"id": "#product",
+							"required":false,
+							"properties":{
+								"name": {
+									"type":"string",
+									"description": "The product name.",
+									"id": "#name",
+									"required":true
+								}
+							}
+						},
 
 						"routeStations": {
 							"type":"array",
@@ -229,7 +243,7 @@
 											"required":false,
 											"properties":{
 												"type": {
-													"enum":["led","tft","audio"],
+													"enum":["led","tft","audio","display_interior","display_exterior"],
 													"description":"The type of track.",
 													"id": "#type",
 													"required":false
