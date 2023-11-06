@@ -48,6 +48,10 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - createdAt für Erzeugungszeitpunkt des Fahrplans hinzugefügt.
 - **v2.4.3**
     - 'fileDownloadUrl' in meta daten hinzugefügt
+- **v2.4.4**
+    - Fehlende Informationen hinzugefügt.
+        - product.name in Zuginformationen hinzugefügt.
+        - Script track type Enum um "display_interior" und "display_exterior" erweitert.
          
 ### English
 - **v0.1.1**
@@ -91,3 +95,7 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Added 'createdAt' which represents the generation timestamp of the schedule.
 - **v2.4.3**
     - Added 'fileDownloadUrl' to meta data
+- **v2.4.4**
+    - Added missing information.
+        - Added product.name in train information.
+        - Added "display_interior" and "display_exterior" in script track type enum.
