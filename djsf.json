@@ -668,7 +668,7 @@
 					"channels": {
 						"type":"array",
 						"required":true,
-						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis']",
 						"items": {
 							"type":"string",
 							"minItems":1
