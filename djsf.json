@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.4.3",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.5.0",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -53,7 +53,7 @@
 		},
 		"files": {
 			"type": "array",
-			"description": "Contains a list of all files in the schedule.",
+			"description": "Contains a list of all files in the schedule and those essential for special announcements.",
 			"minitems": "0",
 			"id": "http://diloc.de/djsf/files",
 			"required":true,
@@ -347,6 +347,59 @@
 						}
 					}
 				}
+		},
+		"specialAnnouncements": {
+			"type":"array",
+			"description": "Contains a list of special announcements",
+			"minitems": "0",
+			"id": "http://diloc.de/djsf/specialAnnouncements",
+			"required":true,
+			"items": {
+				"minItems":0,
+				"type":"object",
+				"description": "The specialAnnouncement encapsulates details and data of a special announcement",
+				"id": "http://diloc.de/djsf/specialAnnouncement",
+				"required":false,
+				"properties": {
+					"name": {
+						"type": "string",
+						"required": true,
+						"description": "The short name of the specialAnnouncement."
+					},
+					"description": {
+						"type": "string",
+						"required": true,
+						"description": "The description of the specialAnnouncement."
+					},
+					"number": {
+						"type": "integer",
+						"required": true,
+						"description": "The number of the specialAnnouncement used mainly to easily find/identify a specialAnnouncement by the driver. This musst be a unique number."
+					},
+					"sortOrder": {
+						"type": "integer",
+						"required": false,
+						"description": "An optional property that can be used by DiLoc|OnBoard to defines the order in which special announcements are arranged"
+					},
+					"commands": {
+						"type": "array",
+						"required": true,
+						"description": "An array of commands that the specialAnnouncement will execute when it is activated",
+						"items":[{
+							"required":false,
+							"type":"object",
+							"description": "The parameters for the command. Parameters are command specific. So each command-type has different parameters.",
+							"anyOf":[
+								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showDestination" },
+								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/enqueueFiles" },
+								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showText" },
+								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/enqueueAlert" },
+								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showNote" }
+							]
+						}]
+					}
+				}
+			}
 		}
 	},
 	"definitions":{
@@ -491,7 +544,6 @@
 				"type":"object",
 				"description":"The unmute-command has no parameters."
 			}
-
 		},
 		"routeStationIdentifier": {
 			"type":"object",
@@ -536,6 +588,184 @@
 					"description": "The id code of the arrival station of this multitraction partner train.",
 					"id": "#arrivalStationIdCode",
 					"required":true
+				}
+			}
+		},
+		"specialAnnouncementPossibleCommands": {
+			"showText":{
+				"type":"object",
+				"description": "Can be used to display a predefined text on the configured output channels",
+				"properties":{
+					"name": {
+						"default": "showText"
+					},
+					"channels": {
+						"type":"array",
+						"required":true,
+						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis', 'display_exterior.front', 'display_exterior.side']",
+						"items": {
+							"type":"string",
+							"minItems":1
+						}
+					},
+					"text": {
+						"type":"string",
+						"required":true,
+						"description":"The text that should be displayed. For a multi language text, the text can be defined in different languages with a '|' separator, for example: 'Willkommen|Welcome|Bienvenue'"
+					}
+				}
+			},
+			"showDestination":{
+				"type":"object",
+				"description": "Can be used to display the destination of the train on the displays.",
+				"properties":{
+					"name": {
+						"default": "showDestination"
+					},
+					"channels": {
+						"type":"array",
+						"required":true,
+						"description":"The output channels on which this command will be executed. For example: ['display_exterior.side', 'display_exterior.front']",
+						"items": {
+							"type":"string",
+							"minItems":1
+						}
+					},
+					"line": {
+						"type":"string",
+						"required":false,
+						"description":"The line that should be displayed. For example 'S21'."
+					},
+					"destination":{
+						"type":"string",
+						"required":true,
+						"description":"The name of the destination station that should be displayed."
+					},
+					"via":{
+						"type":"array",
+						"required":false,
+						"description":"(optional) The via stations that should be displayed.",
+						"items": {
+							"type":"string",
+							"minItems":0
+						}
+					}
+				}
+			},
+			"showNote":{
+				"type":"object",
+				"description": "Can be used to display a predefined text with a predefined title on the TFT devices.",
+				"properties":{
+					"name": {
+						"default": "showNote",
+						"required":true
+					},
+					"type": {
+						"enum":["notice", "alert"],
+						"required":true,
+						"description": "When the type is notice, this will be cause usually displaying the announcement's title with a blue background, this is mainly used for operational informations. When the type is alert, the title's background will be red, this is mainly used for disruption informations."
+					},
+					"channels": {
+						"type":"array",
+						"required":true,
+						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis']",
+						"items": {
+							"type":"string",
+							"minItems":1
+						}
+					},
+					"text": {
+						"type":"string",
+						"required":true,
+						"description":"The text that should be displayed."
+					}
+				}
+			},
+			"enqueueAlert":{
+				"type":"object",
+				"description": "Can be used to simultaneously play a list audio files and to display the according information text on the TFTs ",
+				"properties":{
+					"name": {
+						"default": "enqueueAlert",
+						"required":true
+					},
+					"type": {
+						"enum":["notice", "alert"],
+						"required":true,
+						"description": "When the type is notice, this will be cause usually displaying the announcement's title with a blue background, this is mainly used for operational informations. When the type is alert, the title's background will be red, this is mainly used for disruption informations."
+					},
+					"autoCancel": {
+						"default": "immediate",
+						"required":true,
+						"description":"Indicates that this command should immediately be canceled to not be observed as an active schedule command override"
+					},
+					"channels": {
+						"type":"array",
+						"required":true,
+						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+						"items": {
+							"type":"string",
+							"minItems":1
+						}
+					},
+					"announcements": {
+						"type":"array",
+						"description":"A list of announcements that should be played in order. This can be a list of localized announcements.",
+						"required":true,
+						"items": [{
+							"type":"object",
+							"description": "The announcement object properties.",
+							"required":true,
+							"properties": {
+								"title": {
+									"type": "string",
+									"required": true,
+									"description": "The title of the announcement that should be displayed on the displays."
+								},
+								"text": {
+									"type": "string",
+									"required": true,
+									"description": "The visual text of the announcement that should be displayed on the displays."
+								},
+								"files": {
+									"type":"array",
+									"required":true,
+									"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
+									"items":{
+										"type":"string",
+										"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
+									}
+								}
+							}
+						}]
+					}
+				}
+			},
+			"enqueueFiles":{
+				"type":"object",
+				"description": "Can be used to play a list audio files.",
+				"properties":{
+					"name": {
+						"default": "enqueueFiles"
+					},
+					"channels": {
+						"type":"array",
+						"required":true,
+						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+						"items": {
+							"type":"string",
+							"minItems":1
+						}
+					},
+					"playList": {
+						"type":"array",
+						"required":true,
+						"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
+						"items":{
+							"type":"string",
+							"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
+						}
+					}
 				}
 			}
 		}

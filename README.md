@@ -52,6 +52,8 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Fehlende Informationen hinzugefügt.
         - product.name in Zuginformationen hinzugefügt.
         - Script track type Enum um "display_interior" und "display_exterior" erweitert.
+- **v2.5.0**
+    - Neue Eigenschaft 'specialannouncements' zum JSON-Schema hinzugefügt.
          
 ### English
 - **v0.1.1**
@@ -99,3 +101,5 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Added missing information.
         - Added product.name in train information.
         - Added "display_interior" and "display_exterior" in script track type enum.
+- **v2.5.0**
+    - Added 'specialAnnouncements' property to the JSON schema.
