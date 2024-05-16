@@ -103,3 +103,5 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
         - Added "display_interior" and "display_exterior" in script track type enum.
 - **v2.5.0**
     - Added 'specialAnnouncements' property to the JSON schema.
+- **v2.5.1**
+    - Added 'externalIdentifier' property to routeStationIdentifier.
