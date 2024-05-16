@@ -565,7 +565,7 @@
 				},
 				"externalIdentifier": {
 					"type": "string",
-					"description": "A unique identifier for the station, formed by concatenating the station's idCode with the train's arrival track number. For example, APPZ_1.",
+					"description": "A unique identifier for the station, this could be any external identifier, for example the REC_ORT number of a VDV452 schedule Import.",
 					"id": "#externalIdentifier",
 					"required": false
 				}
