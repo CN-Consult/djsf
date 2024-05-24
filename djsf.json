@@ -2,7 +2,7 @@
 	"type":"object",
 	"$schema": "http://json-schema.org/draft-03/schema",
 	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.5.0",
+	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.5.1",
 	"required":false,
 	"properties":{
 		"meta":{
@@ -562,6 +562,12 @@
 					"description": "The sequence number of the station on the route.",
 					"id": "#sequenceNumber",
 					"required":true
+				},
+				"externalIdentifier": {
+					"type": "string",
+					"description": "A unique identifier for the station, this could be any external identifier, for example the REC_ORT number of a VDV452 schedule Import.",
+					"id": "#externalIdentifier",
+					"required": false
 				}
 			}
 		},
