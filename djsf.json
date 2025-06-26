@@ -658,7 +658,7 @@
 					},
 					"trainNumber":{
 						"type":"string",
-						"required":true,
+						"required":false,
 						"description":"The number of the train. This may contain alphanumeric symbols and dots."
 					}
 				}
