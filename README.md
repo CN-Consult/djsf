@@ -105,3 +105,5 @@ This repository contains all information about the **D**iLoc**J**son**S**chedule
     - Added 'specialAnnouncements' property to the JSON schema.
 - **v2.5.1**
     - Added 'externalIdentifier' property to routeStationIdentifier.
+- **v2.5.2**
+    - Added the 'trainNumber' property to the showDestination command's properties.
