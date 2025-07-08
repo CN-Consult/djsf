@@ -486,6 +486,11 @@
 							"type":"string",
 							"minItems":0
 						}
+					},
+					"trainNumber":{
+						"type":"string",
+						"required":false,
+						"description":"The number of the train. This may contain alphanumeric symbols and dots."
 					}
 				}
 			},
