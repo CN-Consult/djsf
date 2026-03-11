@@ -54,7 +54,7 @@
 		"files": {
 			"type": "array",
 			"description": "Contains a list of all files in the schedule and those essential for special announcements.",
-			"minitems": "0",
+			"minItems": 0,
 			"id": "http://diloc.de/djsf/files",
 			"required":true,
 			"items": {
@@ -84,7 +84,7 @@
 		"trains": {
 			"type":"array",
 			"description": "Contains a list of all trains in the schedule.",
-			"minitems": "1",
+			"minItems": 1,
 			"id": "http://diloc.de/djsf/trains",
 			"required":true,
 			"items":
@@ -130,7 +130,7 @@
 						"routeStations": {
 							"type":"array",
 							"description": "Contains all stations the train will travel.",
-							"minitems": "2",
+							"minItems": 2,
 							"id": "http://diloc.de/djsf/train/routeStations",
 							"required":true,
 							"items":
@@ -339,7 +339,7 @@
 							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train. The order of the trains in the array defines the order of trains in the multitraction.",
 							"id": "#multiTractionTrains",
 							"required":false,
-							"minitems": 0,
+							"minItems": 0,
 							"items":[{
 								"type":"object",
 								"$ref":"#/definitions/multiTractionTrains"
@@ -351,7 +351,7 @@
 		"specialAnnouncements": {
 			"type":"array",
 			"description": "Contains a list of special announcements",
-			"minitems": "0",
+			"minItems": 0,
 			"id": "http://diloc.de/djsf/specialAnnouncements",
 			"required":true,
 			"items": {
