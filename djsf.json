@@ -245,68 +245,64 @@
 									"type":"array",
 									"description": "A track contains the information what a specific output device in the train should do.",
 									"id": "http://diloc.de/djsf/train/script/tracks",
-									"items":[
-										{
-                                            "title": "track",
-											"type":"object",
-											"id": "http://diloc.de/djsf/trains/script/track",
-											"required":["identifier", "startCommands"],
-											"properties":{
-												"type": {
-                                                    "title": "type",
-													"enum":["led","tft","audio","display_interior","display_exterior"],
-													"description":"The type of track.",
-													"id": "#type"
-												},
-												"identifier": {
-                                                    "title": "identifier",
-													"type":"string",
-													"description": "The identifier that identifies the channel. This is unique per script.",
-													"id": "#identifier"
-												},
-												"startCommands": {
-                                                    "title": "startCommands",
-													"type":"array",
-													"description": "Contains commands that should be sent to the output when the train is activated by the driver.",
-													"id": "#startCommands",
-													"items":[{
-                                                        "title": "startCommand",
-														"type":"object",
-														"$ref":"#/definitions/command"
-													}]
-												},
-												"stations": {
-                                                    "title": "stations",
-													"type":"array",
-													"id": "#stations",
-													"items":[
-														{
-                                                            "title": "station",
-															"type":"object",
-															"id": "#station",
-															"properties":{
-																"commands": {
-                                                                    "title": "commands",
-																	"type":"array",
-																	"id": "#commands",
-																	"items":
-																	{
-                                                                        "title": "command",
-																		"type":"object",
-																		"$ref":"#/definitions/command"
-																	}
-																},
-																"routeStationIdentifier": {
-                                                                    "title": "routeStationIdentifier",
-																	"$ref":"#/definitions/routeStationIdentifier"
-																}
-															}
-														}
-													]
-												}
-											}
-										}
-									]
+									"items": {
+                                        "title": "track",
+                                        "type":"object",
+                                        "id": "http://diloc.de/djsf/trains/script/track",
+                                        "required":["identifier", "startCommands"],
+                                        "properties":{
+                                            "type": {
+                                                "title": "type",
+                                                "enum":["led","tft","audio","display_interior","display_exterior"],
+                                                "description":"The type of track.",
+                                                "id": "#type"
+                                            },
+                                            "identifier": {
+                                                "title": "identifier",
+                                                "type":"string",
+                                                "description": "The identifier that identifies the channel. This is unique per script.",
+                                                "id": "#identifier"
+                                            },
+                                            "startCommands": {
+                                                "title": "startCommands",
+                                                "type":"array",
+                                                "description": "Contains commands that should be sent to the output when the train is activated by the driver.",
+                                                "id": "#startCommands",
+                                                "items":{
+                                                    "title": "startCommand",
+                                                    "type":"object",
+                                                    "$ref":"#/definitions/command"
+                                                }
+                                            },
+                                            "stations": {
+                                                "title": "stations",
+                                                "type":"array",
+                                                "id": "#stations",
+                                                "items": {
+                                                    "title": "station",
+                                                    "type":"object",
+                                                    "id": "#station",
+                                                    "properties":{
+                                                        "commands": {
+                                                            "title": "commands",
+                                                            "type":"array",
+                                                            "id": "#commands",
+                                                            "items":
+                                                            {
+                                                                "title": "command",
+                                                                "type":"object",
+                                                                "$ref":"#/definitions/command"
+                                                            }
+                                                        },
+                                                        "routeStationIdentifier": {
+                                                            "title": "routeStationIdentifier",
+                                                            "$ref":"#/definitions/routeStationIdentifier"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
 								}
 							}
 						},
@@ -352,11 +348,11 @@
 							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train. The order of the trains in the array defines the order of trains in the multitraction.",
 							"id": "#multiTractionTrains",
 							"minItems": 0,
-							"items":[{
+							"items":{
                                 "title": "multiTractionTrain",
 								"type":"object",
 								"$ref":"#/definitions/multiTractionTrains"
-							}]
+							}
 						}
 					}
 				}
@@ -398,7 +394,7 @@
                         "title": "commands",
 						"type": "array",
 						"description": "An array of commands that the specialAnnouncement will execute when it is activated",
-						"items":[{
+						"items":{
                             "title": "command",
 							"type":"object",
 							"description": "The parameters for the command. Parameters are command specific. So each command-type has different parameters.",
@@ -409,7 +405,7 @@
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/enqueueAlert" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showNote" }
 							]
-						}]
+						}
 					}
 				}
 			}
@@ -781,7 +777,7 @@
 						"type":"array",
 						"description":"A list of announcements that should be played in order. This can be a list of localized announcements.",
                         "minItems":1,
-						"items": [{
+						"items": {
                             "title": "announcement",
 							"type":"object",
 							"description": "The announcement object properties.",
@@ -808,7 +804,7 @@
 									}
 								}
 							}
-						}]
+						}
 					}
 				}
 			},
