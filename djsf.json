@@ -430,7 +430,7 @@
 				},
 				"timeOffset": {
                     "title": "timeOffset",
-					"type": ["integer"],
+					"type": "integer",
 					"description": "This is required, if parameter 'on' is 'planneddeparturetime'. This should contain for example '-100' to trigger an announcement hundred seconds before planned departure time."
 				},
 				"params": {
