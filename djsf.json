@@ -369,7 +369,6 @@
 			"id": "http://diloc.de/djsf/specialAnnouncements",
 			"items": {
                 "title": "specialAnnouncement",
-				"minItems":0,
 				"type":"object",
 				"description": "The specialAnnouncement encapsulates details and data of a special announcement",
 				"id": "http://diloc.de/djsf/specialAnnouncement",
