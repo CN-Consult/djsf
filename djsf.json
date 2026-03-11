@@ -501,10 +501,10 @@
                         "title": "via",
 						"type":"array",
 						"description":"The via stations that should be displayed.",
+                        "minItems": 0,
 						"items": {
                             "title": "viaStation",
-							"type":"string",
-							"minItems":0
+							"type": "string"
 						}
 					},
 					"trainNumber":{
@@ -650,10 +650,10 @@
                         "title": "channels",
 						"type":"array",
 						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis', 'display_exterior.front', 'display_exterior.side']",
+                        "minItems": 1,
 						"items": {
                             "title": "channel",
-							"type":"string",
-							"minItems":1
+							"type": "string"
 						}
 					},
 					"text": {
@@ -677,10 +677,10 @@
                         "title": "channels",
 						"type":"array",
 						"description":"The output channels on which this command will be executed. For example: ['display_exterior.side', 'display_exterior.front']",
+                        "minItems": 1,
 						"items": {
                             "title": "channel",
-							"type":"string",
-							"minItems":1
+							"type":"string"
 						}
 					},
 					"line": {
@@ -697,10 +697,10 @@
                         "title": "via",
 						"type":"array",
 						"description":"(optional) The via stations that should be displayed.",
+                        "minItems": 0,
 						"items": {
                             "title": "viaStation",
-							"type":"string",
-							"minItems":0
+							"type":"string"
 						}
 					},
 					"trainNumber":{
@@ -729,10 +729,10 @@
                         "title": "channels",
 						"type":"array",
 						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis']",
+                        "minItems": 1,
 						"items": {
                             "title": "channel",
-							"type":"string",
-							"minItems":1
+							"type":"string"
 						}
 					},
 					"text": {
@@ -766,10 +766,10 @@
                         "title": "channels",
 						"type":"array",
 						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+                        "minItems": 1,
 						"items": {
                             "title": "channel",
-							"type":"string",
-							"minItems":1
+							"type":"string"
 						}
 					},
 					"announcements": {
@@ -822,10 +822,10 @@
                         "title": "channels",
 						"type":"array",
 						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+                        "minItems": 1,
 						"items": {
                             "title": "channel",
-							"type":"string",
-							"minItems":1
+							"type": "string"
 						}
 					},
 					"playList": {
