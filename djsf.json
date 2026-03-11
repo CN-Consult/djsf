@@ -414,6 +414,7 @@
     "definitions":{
 		"command":{
             "title": "command",
+            "type":"object",
 			"required":["name", "on"],
 			"properties":{
 				"name": {
