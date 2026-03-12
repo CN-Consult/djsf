@@ -390,7 +390,7 @@
                             "title": "command",
 							"type":"object",
 							"description": "The parameters for the command. Parameters are command specific. So each command-type has different parameters.",
-							"anyOf":[
+							"oneOf":[
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showDestination" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/enqueueFiles" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showText" },
