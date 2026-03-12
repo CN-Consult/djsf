@@ -637,7 +637,7 @@
 				"properties":{
 					"name": {
                         "title": "name",
-						"default": "showText"
+						"enum": "showText"
 					},
 					"channels": {
                         "title": "channels",
@@ -664,7 +664,7 @@
 				"properties":{
 					"name": {
                         "title": "name",
-						"default": "showDestination"
+						"enum": "showDestination"
 					},
 					"channels": {
                         "title": "channels",
@@ -711,7 +711,7 @@
 				"properties":{
 					"name": {
                         "title": "name",
-						"default": "showNote"
+						"enum": "showNote"
 					},
 					"type": {
                         "title": "type",
@@ -743,7 +743,7 @@
                 "properties":{
 					"name": {
                         "title": "name",
-						"default": "enqueueAlert"
+						"enum": "enqueueAlert"
 					},
 					"type": {
                         "title": "type",
@@ -809,7 +809,7 @@
 				"properties":{
 					"name": {
                         "title": "name",
-						"default": "enqueueFiles"
+						"enum": "enqueueFiles"
 					},
 					"channels": {
                         "title": "channels",
