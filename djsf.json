@@ -545,7 +545,8 @@
                         "title": "playList",
 						"type":"array",
 						"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
-						"items":{
+						"minItems": 1,
+                        "items":{
                             "title": "fileName",
 							"type":"string",
 							"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
@@ -820,7 +821,7 @@
                         "title": "playList",
 						"type":"array",
 						"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
-						"minItems":1,
+						"minItems": 1,
                         "items":{
                             "title": "fileName",
 							"type":"string",
