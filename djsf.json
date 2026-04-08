@@ -57,7 +57,6 @@
             "title": "files",
 			"type": "array",
 			"description": "Contains a list of all files in the schedule and those essential for special announcements.",
-			"minItems": 0,
 			"id": "http://diloc.de/djsf/files",
 			"items": {
                 "title": "file",
@@ -142,7 +141,7 @@
 								{
                                     "title": "routeStation",
 									"type":"object",
-									"required":["stopType"],
+									"required":["routeStationIdentifier","stopType"],
 									"id": "http://diloc.de/djsf/train/routeStations",
 									"properties":{
 										"connections": {
@@ -341,7 +340,6 @@
 							"type":"array",
 							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train. The order of the trains in the array defines the order of trains in the multitraction.",
 							"id": "#multiTractionTrains",
-							"minItems": 0,
 							"items":{
 								"$ref":"#/definitions/multiTractionTrains"
 							}
@@ -353,7 +351,6 @@
             "title": "specialAnnouncements",
 			"type":"array",
 			"description": "Contains a list of special announcements",
-			"minItems": 0,
 			"id": "http://diloc.de/djsf/specialAnnouncements",
 			"items": {
                 "title": "specialAnnouncement",
@@ -494,7 +491,6 @@
                         "title": "via",
 						"type":"array",
 						"description":"The via stations that should be displayed.",
-                        "minItems": 0,
 						"items": {
                             "title": "viaStation",
 							"type": "string"
@@ -690,7 +686,6 @@
                         "title": "via",
 						"type":"array",
 						"description":"(optional) The via stations that should be displayed.",
-                        "minItems": 0,
 						"items": {
                             "title": "viaStation",
 							"type":"string"
@@ -825,7 +820,8 @@
                         "title": "playList",
 						"type":"array",
 						"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
-						"items":{
+						"minItems":1,
+                        "items":{
                             "title": "fileName",
 							"type":"string",
 							"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
