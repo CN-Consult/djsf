@@ -1,198 +1,204 @@
 {
-	"type":"object",
-	"$schema": "http://json-schema.org/draft-03/schema",
-	"id": "http://diloc.de/djsf",
-	"description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.5.2",
-	"required":false,
+    "type":"object",
+    "$schema": "https://json-schema.org/draft-04/schema#",
+    "id": "http://diloc.de/djsf",
+    "title":"DiLoc JSON Schedule Format",
+    "description":"This schema describes the DiLoc JSON Schedule Format. Version of the Schema: 2.5.2",
+    "required":["meta","files","trains","specialAnnouncements"],
 	"properties":{
 		"meta":{
+            "title":"meta",
 			"type":"object",
-			"required":true,
+			"required":["validFrom","validTo","version","djsfSchemaVersion","type","createdAt"],
 			"description":"Contains meta-information about the schedule.",
 			"properties":{
 				"validFrom":{
+                    "title":"validFrom",
 					"type":"string",
 					"format":"date-time",
-					"required":true,
 					"description":"The date-time from when the schedule is valid."
 				},
 				"validTo":{
+                    "title":"validTo",
 					"type":"string",
 					"format":"date-time",
-					"required":true,
 					"description":"The date-time until this schedule is valid."
 				},
 				"version":{
+                    "title":"version",
 					"type":"string",
-					"required":true,
 					"description":"The version describes the version of the schedule. The version usually starts with 1.0 and is increased for newer versions 1.1, 1.2, etc)"
 				},
 				"djsfSchemaVersion":{
+                    "title":"djsfSchemaVersion",
 					"type":"string",
-					"required":true,
 					"description":"The version describes the djsf schema version of the generated schedule."
 				},
 				"type": {
+                    "title":"type",
 					"enum":["period","day"],
 					"description": "The type of the generated schedule (\"period\" or \"day\").",
-					"id": "#scheduletype",
-					"required":true
+					"id": "#scheduletype"
 				},
 				"createdAt": {
+                    "title":"createdAt",
 					"type":"string",
 					"format":"date-time",
-					"required":true,
 					"description": "The timestamp when the schedule is created in ISO-8601 format. For example: 2022-12-02T10:20:39+00:00"
 				},
 				"fileDownloadUrl": {
+                    "title":"fileDownloadUrl",
 					"type":"string",
-					"required":false,
 					"description": "The URL with path to the API endpoint to download schedule audio files. The file path and mpi device id code are added as query parameter. Example: https://api.example.com/schedules/audio/download?filePath=abc/a.mp3&mpiDeviceIdCode=test"
 				}
 			}
 		},
 		"files": {
+            "title": "files",
 			"type": "array",
 			"description": "Contains a list of all files in the schedule and those essential for special announcements.",
-			"minitems": "0",
 			"id": "http://diloc.de/djsf/files",
-			"required":true,
 			"items": {
+                "title": "file",
 				"type":"object",
 				"description": "The file object contains all information about the file to find it in the schedule-file or download it from the DiLoc-Server.",
 				"id": "http://diloc.de/djsf/file",
-				"required":false,
+                "required":["filePath","type","md5Checksum"],
 				"properties": {
 					"filePath": {
+                        "title": "filePath",
 						"type": "string",
-						"required": true,
 						"description": "The path to the file (including filename) relative to the files folder in the schedule file. This path is used in the playList of the enqueueFiles command."
 					},
 					"type": {
+                        "title": "type",
 						"enum":["audio","image","video"],
-						"description": "The type of the file.",
-						"required":true
+						"description": "The type of the file."
 					},
 					"md5Checksum": {
+                        "title": "md5Checksum",
 						"type": "string",
-						"required": true,
 						"description": "The md5 checksum of the file."
 					}
 				}
 			}
 		},
 		"trains": {
+            "title": "trains",
 			"type":"array",
 			"description": "Contains a list of all trains in the schedule.",
-			"minitems": "1",
+			"minItems": 1,
 			"id": "http://diloc.de/djsf/trains",
-			"required":true,
 			"items":
 				{
+                    "title":"train",
 					"type":"object",
 					"description": "The train object contains all information about a train.",
 					"id": "http://diloc.de/djsf/train",
-					"required":false,
+					"required":["departureTime","routeStations"],
 					"properties":{
 						"trainNumber": {
+                            "title": "trainNumber",
 							"type":"string",
 							"description": "The number of the train. This may contain alphanumeric symbols and dots.",
-							"id": "http://diloc.de/djsf/trains/0/trainNumber",
-							"required":false
+							"id": "http://diloc.de/djsf/trains/0/trainNumber"
 						},
 						"piNumber": {
+                            "title": "piNumber",
 							"type":"string",
 							"description": "The pi number of the train. This may contain alphanumeric symbols and dots.",
-							"id": "http://diloc.de/djsf/trains/0/piNumber",
-							"required":false
+							"id": "http://diloc.de/djsf/trains/0/piNumber"
 						},
 						"departureTime": {
+                            "title": "departureTime",
 							"type":"string",
 							"description": "The departure time of the train in H:i:s format.",
-							"id": "#departureTime",
-							"required":true
+							"id": "#departureTime"
 						},
 						"product": {
+                            "title": "product",
 							"type":"object",
 							"description": "The product information about a train.",
 							"id": "#product",
-							"required":false,
+							"required":["name"],
 							"properties":{
 								"name": {
+                                    "title": "name",
 									"type":"string",
 									"description": "The product name.",
-									"id": "#name",
-									"required":true
+									"id": "#name"
 								}
 							}
 						},
 
 						"routeStations": {
+                            "title": "routeStations",
 							"type":"array",
 							"description": "Contains all stations the train will travel.",
-							"minitems": "2",
+							"minItems": 2,
 							"id": "http://diloc.de/djsf/train/routeStations",
-							"required":true,
 							"items":
 								{
+                                    "title": "routeStation",
 									"type":"object",
-									"required":true,
+									"required":["routeStationIdentifier","stopType"],
 									"id": "http://diloc.de/djsf/train/routeStations",
 									"properties":{
 										"connections": {
+                                            "title": "connections",
 											"type":"array",
 											"description": "An array of connections that should be displayed at this station.",
 											"id": "#connections",
-											"required":false,
 											"items":
 												{
+                                                    "title": "connection",
 													"type":"object",
 													"description": "Contains information about a connection at the station.",
 													"id": "#connection",
-													"required":false,
+													"required":["category","departureTime","destination"],
 													"properties":{
 														"category": {
+                                                            "title": "category",
 															"type":"string",
 															"enum":["underground","citytrain","tram","bus","localtraffic","longdistancetraffic"],
 															"description": "This gives information about how the train should be displayed.",
-															"id": "#category",
-															"required":true
+															"id": "#category"
 														},
 														"departureTime": {
+                                                            "title": "departureTime",
 															"type":"string",
 															"description": "The time when the connected train/bus etc. departs",
-															"id": "#departureTime",
-															"required":true
+															"id": "#departureTime"
 														},
 														"destination": {
+                                                            "title": "destination",
 															"type":"string",
 															"description": "The destination the connected product travels to.",
-															"id": "#destination",
-															"required":true
+															"id": "#destination"
 														},
 														"line": {
+                                                            "title": "line",
 															"type":"string",
 															"description": "The line of the connected product. For example: 201",
-															"id": "#line",
-															"required":false
+															"id": "#line"
 														},
 														"note": {
+                                                            "title": "note",
 															"type":"string",
 															"description": "A note containing additional information about the connection.",
-															"id": "#note",
-															"required":false
+															"id": "#note"
 														},
 														"platform": {
+                                                            "title": "platform",
 															"type":"string",
 															"description": "The platform at which the connected product departs.Examples for this are 1, A or 3A. ",
-															"id": "#platform",
-															"required":false
+															"id": "#platform"
 														},
 														"product": {
+                                                            "title": "product",
 															"type":"string",
 															"description": "The name of the product like 'S12' or 'IC', 'IR', etc. Depending on the content it may be necessary to display a pictogram of the given product. For example for the product IC, IR there are special pictograms in Switzerland that should be displayed in this case.",
-															"id": "#product",
-															"required":false
+															"id": "#product"
 														}
 													}
 												}
@@ -203,22 +209,22 @@
 											"$ref":"#/definitions/routeStationIdentifier"
 										},
 										"stopType": {
+                                            "title": "stopType",
 											"enum":["departure","conditionalHalt","passthrough","technical","exitOnly","arrival", "halt"],
 											"description": "The type of the stop.",
-											"id": "#stopType",
-											"required":true
+											"id": "#stopType"
 										},
 										"timeTableArrivalTime": {
+                                            "title": "timeTableArrivalTime",
 											"type":"number",
 											"description": "The time table arrival time in seconds after the departure of the train. The order of the routeStations must be ascending over timeTableArrivalTime.",
-											"id": "#timeTableArrivalTime",
-											"required":false
+											"id": "#timeTableArrivalTime"
 										},
 										"timeTableDepartureTime": {
+                                            "title": "timeTableDepartureTime",
 											"type":"number",
 											"description": "The time table departure time in seconds after the departure of the train. If stopType equals 'passthrough' the timeTableDepartureTime must be the same like timeTableArrivalTime.",
-											"id": "#timeTableDepartureTime",
-											"required":false
+											"id": "#timeTableDepartureTime"
 										}
 									}
 								}
@@ -226,204 +232,199 @@
 
 						},
 						"script": {
+                            "title": "script",
 							"type":"object",
 							"description": "The script contains all necessary information to drive the passenger information for this train.",
 							"id": "http://diloc.de/djsf/train/script",
-							"required":false,
+							"required":["tracks"],
 							"properties":{
 								"tracks": {
+                                    "title": "tracks",
 									"type":"array",
 									"description": "A track contains the information what a specific output device in the train should do.",
 									"id": "http://diloc.de/djsf/train/script/tracks",
-									"required":true,
-									"items":[
-										{
-											"type":"object",
-											"id": "http://diloc.de/djsf/trains/script/track",
-											"required":false,
-											"properties":{
-												"type": {
-													"enum":["led","tft","audio","display_interior","display_exterior"],
-													"description":"The type of track.",
-													"id": "#type",
-													"required":false
-												},
-												"identifier": {
-													"type":"string",
-													"description": "The identifier that identifies the channel. This is unique per script.",
-													"id": "#identifier",
-													"required":true
-												},
-												"startCommands": {
-													"type":"array",
-													"description": "Contains commands that should be sent to the output when the train is activated by the driver.",
-													"id": "#startCommands",
-													"required":true,
-													"items":[{
-														"type":"object",
-														"$ref":"#/definitions/command"
-													}]
-												},
-												"stations": {
-													"type":"array",
-													"id": "#stations",
-													"required":false,
-													"items":[
-														{
-															"type":"object",
-															"id": "#station",
-															"required":false,
-															"properties":{
-																"commands": {
-																	"type":"array",
-																	"id": "#commands",
-																	"required":false,
-																	"items":
-																	{
-																		"type":"object",
-																		"$ref":"#/definitions/command"
-																	}
-																},
-																"routeStationIdentifier": {
-																	"$ref":"#/definitions/routeStationIdentifier"
-																}
-															}
-														}
-													]
-												}
-											}
-										}
-									]
+									"items": {
+                                        "title": "track",
+                                        "type":"object",
+                                        "id": "http://diloc.de/djsf/trains/script/track",
+                                        "required":["identifier", "startCommands"],
+                                        "properties":{
+                                            "type": {
+                                                "title": "type",
+                                                "enum":["led","tft","audio","display_interior","display_exterior"],
+                                                "description":"The type of track.",
+                                                "id": "#type"
+                                            },
+                                            "identifier": {
+                                                "title": "identifier",
+                                                "type":"string",
+                                                "description": "The identifier that identifies the channel. This is unique per script.",
+                                                "id": "#identifier"
+                                            },
+                                            "startCommands": {
+                                                "title": "startCommands",
+                                                "type":"array",
+                                                "description": "Contains commands that should be sent to the output when the train is activated by the driver.",
+                                                "id": "#startCommands",
+                                                "items":{
+                                                    "$ref":"#/definitions/command"
+                                                }
+                                            },
+                                            "stations": {
+                                                "title": "stations",
+                                                "type":"array",
+                                                "id": "#stations",
+                                                "items": {
+                                                    "title": "station",
+                                                    "type":"object",
+                                                    "id": "#station",
+                                                    "properties":{
+                                                        "commands": {
+                                                            "title": "commands",
+                                                            "type":"array",
+                                                            "id": "#commands",
+                                                            "items":
+                                                            {
+                                                                "$ref":"#/definitions/command"
+                                                            }
+                                                        },
+                                                        "routeStationIdentifier": {
+                                                            "$ref":"#/definitions/routeStationIdentifier"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
 								}
 							}
 						},
 						"travelsOnDays": {
+                            "title": "travelsOnDays",
 							"type":"array",
 							"description": "This defines on which days the train travels. This only applies for period schedules. On day schedules only the trains that really travel on the day are included in the schedule.",
 							"id": "#travelsOnDays",
-							"required":false,
 							"items":
 								{
+                                    "title": "day",
 									"enum":["mo","th","tu","we","fr","sa","su"],
-									"description": "The days the train travels. ",
-									"required":false
+									"description": "The days the train travels. "
 								}
-
 
 						},
 						"nextNumber": {
+                            "title": "nextNumber",
 							"type":"string",
 							"description": "The number of the next train in case the train returns as another train number. This can be used to directly select the next train when the train arrives at its destination station. This can also be used to define a continuation, when another train number continue the trip.",
-							"id": "#nextNumber",
-							"required":false
+							"id": "#nextNumber"
 						},
                         "nextPiNumber": {
-                          "type":"string",
-                          "description": "The pi number of the next train.",
-                          "id": "#nextPiNumber",
-                          "required":false
+                            "title": "nextPiNumber",
+                            "type":"string",
+                            "description": "The pi number of the next train.",
+                            "id": "#nextPiNumber"
                         },
 						"nextLinkType": {
+                            "title": "nextLinkType",
 							"type":"array",
 							"description": "Defines the link type of two train numbers.",
 							"id": "#nextLinkType",
-							"required":false,
 							"items": {
+                                "title": "linkType",
 								"enum":["circular", "continuation"],
-								"description": "Circular defines the link type for regular circulation trips. Continuation defines a link type for a train which does not circulate at the destination station.",
-								"required":false
+								"description": "Circular defines the link type for regular circulation trips. Continuation defines a link type for a train which does not circulate at the destination station."
 							}
 						},
 						"multiTractionTrains" : {
+                            "title": "multiTractionTrains",
 							"type":"array",
 							"description": "This could be null, an empty array or an array of objects. Null means that this trains does not have any multitraction partner. An empty array means that this trains is a multitraction partner for another leading train. And an array of objects means that this train has multitraction partner and it's the leading train. The order of the trains in the array defines the order of trains in the multitraction.",
 							"id": "#multiTractionTrains",
-							"required":false,
-							"minitems": 0,
-							"items":[{
-								"type":"object",
+							"items":{
 								"$ref":"#/definitions/multiTractionTrains"
-							}]
+							}
 						}
 					}
 				}
 		},
 		"specialAnnouncements": {
+            "title": "specialAnnouncements",
 			"type":"array",
 			"description": "Contains a list of special announcements",
-			"minitems": "0",
 			"id": "http://diloc.de/djsf/specialAnnouncements",
-			"required":true,
 			"items": {
-				"minItems":0,
+                "title": "specialAnnouncement",
 				"type":"object",
 				"description": "The specialAnnouncement encapsulates details and data of a special announcement",
 				"id": "http://diloc.de/djsf/specialAnnouncement",
-				"required":false,
+				"required":["name", "description", "number", "commands"],
 				"properties": {
 					"name": {
+                        "title": "name",
 						"type": "string",
-						"required": true,
 						"description": "The short name of the specialAnnouncement."
 					},
 					"description": {
+                        "title": "description",
 						"type": "string",
-						"required": true,
 						"description": "The description of the specialAnnouncement."
 					},
 					"number": {
+                        "title": "number",
 						"type": "integer",
-						"required": true,
 						"description": "The number of the specialAnnouncement used mainly to easily find/identify a specialAnnouncement by the driver. This musst be a unique number."
 					},
 					"sortOrder": {
+                        "title": "sortOrder",
 						"type": "integer",
-						"required": false,
 						"description": "An optional property that can be used by DiLoc|OnBoard to defines the order in which special announcements are arranged"
 					},
 					"commands": {
+                        "title": "commands",
 						"type": "array",
-						"required": true,
 						"description": "An array of commands that the specialAnnouncement will execute when it is activated",
-						"items":[{
-							"required":false,
+						"items":{
+                            "title": "command",
 							"type":"object",
 							"description": "The parameters for the command. Parameters are command specific. So each command-type has different parameters.",
-							"anyOf":[
+							"oneOf":[
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showDestination" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/enqueueFiles" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showText" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/enqueueAlert" },
 								{ "$ref":"#/definitions/specialAnnouncementPossibleCommands/showNote" }
 							]
-						}]
+						}
 					}
 				}
 			}
 		}
 	},
-	"definitions":{
+    "definitions":{
 		"command":{
-			"required":false,
+            "title": "command",
+            "type":"object",
+			"required":["name", "on"],
 			"properties":{
 				"name": {
+                    "title": "name",
 					"type":"string",
 					"description": "The name of the command that should be sent.",
-					"id": "http://diloc.de/djsf/trains/0/script/tracks/0/startCommands/0/name",
-					"required":true
+					"id": "http://diloc.de/djsf/trains/0/script/tracks/0/startCommands/0/name"
 				},
 				"on": {
+                    "title": "on",
 					"type":["integer", "string"],
 					"description": "Describes where the action should be executed. This can either be a negative number like -100 or one of the fixed strings 'halt' and 'start'. Number are interpreted as meters before/after the station. 'halt' means when the train halts at the given station. 'start' means when the train starts and should be used inside startCommands. For pre announcements, this should contain 'plannedDepartureTime'",
-					"id": "http://diloc.de/djsf/trains/0/script/tracks/0/startCommands/0/name",
-					"required":true
+					"id": "http://diloc.de/djsf/trains/0/script/tracks/0/startCommands/0/name"
 				},
 				"timeOffset": {
-					"type": ["integer"],
-					"description": "This is required, if parameter 'on' is 'planneddeparturetime'. This should contain for example '-100' to trigger an announcement hundred seconds before planned departure time.",
-					"required": false
+                    "title": "timeOffset",
+					"type": "integer",
+					"description": "This is required, if parameter 'on' is 'planneddeparturetime'. This should contain for example '-100' to trigger an announcement hundred seconds before planned departure time."
 				},
 				"params": {
+                    "title": "params",
 					"type":"object",
 					"description": "The parameters for the command. Parameters are command specific. So each command-type has different parameters.",
 					"id": "http://diloc.de/djsf/definitions/params",
@@ -445,92 +446,108 @@
 			}
 		},
 		"params":{
+            "title": "params",
 			"showPearlChain":{
+                "title": "showPearlChain",
 				"type":"object",
 				"description":"The showPearlChain-command has no parameters."
 			},
 			"showConnections":{
+                "title": "showConnections",
 				"type":"object",
 				"description":"The showConnections-command has no parameters."
 			},
 			"showEmpty":{
+                "title": "showEmpty",
 				"type":"object",
 				"description":"The showEmpty-command has no parameters."
 			},
 			"showBlack":{
+                "title": "showBlack",
 				"type":"object",
 				"description":"The showBlack-command has no parameters."
 			},
 			"showMessage":{
+                "title": "showMessage",
 				"type":"object",
 				"description":"The parameters of the showMessage-command are still TBD."
 			},
 			"showDestination":{
+                "title": "showDestination",
 				"type":"object",
+                "required": ["destination"],
 				"properties":{
 					"line": {
+                        "title": "line",
 						"type":"string",
-						"required":false,
 						"description":"The line that should be displayed. For example 'S21'."
 					},
 					"destination":{
+                        "title": "destination",
 						"type":"string",
-						"required":true,
 						"description":"The name of the destination station that should be displayed."
 					},
 					"via":{
+                        "title": "via",
 						"type":"array",
-						"required":false,
 						"description":"The via stations that should be displayed.",
 						"items": {
-							"type":"string",
-							"minItems":0
+                            "title": "viaStation",
+							"type": "string"
 						}
 					},
 					"trainNumber":{
+                        "title": "trainNumber",
 						"type":"string",
-						"required":false,
 						"description":"The number of the train. This may contain alphanumeric symbols and dots."
 					}
 				}
 			},
 			"showText":{
+                "title": "showText",
 				"type":"object",
 				"properties":{
 					"text": {
+                        "title": "text",
 						"type":"string",
-						"required":false,
 						"description":"The text that should be displayed."
 					}
 				}
 			},
 			"clear":{
+                "title": "clear",
 				"type":"object",
 				"description":"The clear-command has no parameters."
 			},
 			"enqueueText":{
+                "title": "enqueueText",
 				"type":"object",
+                "required": ["text", "lang"],
 				"properties":{
 					"text": {
+                        "title": "text",
 						"type":"string",
-						"required":true,
 						"description":"The Text that should be announced by the passenger information system."
 					},
 					"lang":{
+                        "title": "lang",
 						"type":"string",
-						"required":true,
 						"description":"The language the text is in. For example 'de' or 'en'"
 					}
 				}
 			},
 			"enqueueFiles":{
+                "title": "enqueueFiles",
 				"type":"object",
+                "required": ["playList"],
 				"properties":{
 					"playList": {
+                        "title": "playList",
 						"type":"array",
-						"required":true,
 						"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
-						"items":{
+						"minItems": 1,
+                        "items":{
+                            "title": "fileName",
 							"type":"string",
 							"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
 						}
@@ -538,246 +555,275 @@
 				}
 			},
 			"clearQueue":{
+                "title": "clearQueue",
 				"type":"object",
 				"description":"The clearQueue-command has no parameters."
 			},
 			"mute":{
+                "title": "mute",
 				"type":"object",
 				"description":"The mute-command has no parameters."
 			},
 			"unmute":{
+                "title": "unmute",
 				"type":"object",
 				"description":"The unmute-command has no parameters."
 			}
 		},
 		"routeStationIdentifier": {
+            "title": "routeStationIdentifier",
 			"type":"object",
 			"id": "#routeStationIdentifier",
 			"description": "Identifies a station uniquely on a route. Contains the idCode and the sequence number of the station in the route.",
-			"required":true,
+			"required":["idCode","sequenceNumber"],
 			"properties": {
 				"idCode": {
+                    "title": "idCode",
 					"type":"string",
 					"description": "The id code of the station, like APPZ for Appenzell.",
-					"id": "#idCode",
-					"required":true
+					"id": "#idCode"
 				},
 				"sequenceNumber": {
+                    "title": "sequenceNumber",
 					"type":"number",
 					"description": "The sequence number of the station on the route.",
-					"id": "#sequenceNumber",
-					"required":true
+					"id": "#sequenceNumber"
 				},
 				"externalIdentifier": {
+                    "title": "externalIdentifier",
 					"type": "string",
 					"description": "A unique identifier for the station, this could be any external identifier, for example the REC_ORT number of a VDV452 schedule Import.",
-					"id": "#externalIdentifier",
-					"required": false
+					"id": "#externalIdentifier"
 				}
 			}
 		},
 		"multiTractionTrains": {
+            "title": "multiTractionTrains",
 			"type": "object",
 			"id": "#multiTractionTrains",
 			"description": "",
-			"required": false,
+			"required": ["number","piNumber","arrivalStationIdCode"],
 			"properties": {
 				"number": {
+                    "title": "number",
 					"type":"string",
 					"description": "The number of the train. This may contain alphanumeric symbols and dots.",
-					"id": "#number",
-					"required":true
+					"id": "#number"
 				},
 				"piNumber": {
+                    "title": "piNumber",
 					"type":"string",
 					"description": "The pi number of the train. This may contain alphanumeric symbols and dots.",
-					"id": "#piNumber",
-					"required":true
+					"id": "#piNumber"
 				},
 				"arrivalStationIdCode": {
+                    "title": "arrivalStationIdCode",
 					"type":"string",
 					"description": "The id code of the arrival station of this multitraction partner train.",
-					"id": "#arrivalStationIdCode",
-					"required":true
+					"id": "#arrivalStationIdCode"
 				}
 			}
 		},
 		"specialAnnouncementPossibleCommands": {
+            "title": "specialAnnouncementPossibleCommands",
 			"showText":{
+                "title": "showText",
 				"type":"object",
 				"description": "Can be used to display a predefined text on the configured output channels",
+                "required": ["channels","text"],
 				"properties":{
 					"name": {
-						"default": "showText"
+                        "title": "name",
+						"enum": "showText"
 					},
 					"channels": {
+                        "title": "channels",
 						"type":"array",
-						"required":true,
 						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis', 'display_exterior.front', 'display_exterior.side']",
+                        "minItems": 1,
 						"items": {
-							"type":"string",
-							"minItems":1
+                            "title": "channel",
+							"type": "string"
 						}
 					},
 					"text": {
+                        "title": "text",
 						"type":"string",
-						"required":true,
 						"description":"The text that should be displayed. For a multi language text, the text can be defined in different languages with a '|' separator, for example: 'Willkommen|Welcome|Bienvenue'"
 					}
 				}
 			},
 			"showDestination":{
+                "title": "showDestination",
 				"type":"object",
 				"description": "Can be used to display the destination of the train on the displays.",
+                "required": ["channels", "destination"],
 				"properties":{
 					"name": {
-						"default": "showDestination"
+                        "title": "name",
+						"enum": "showDestination"
 					},
 					"channels": {
+                        "title": "channels",
 						"type":"array",
-						"required":true,
 						"description":"The output channels on which this command will be executed. For example: ['display_exterior.side', 'display_exterior.front']",
+                        "minItems": 1,
 						"items": {
-							"type":"string",
-							"minItems":1
+                            "title": "channel",
+							"type":"string"
 						}
 					},
 					"line": {
+                        "title": "line",
 						"type":"string",
-						"required":false,
 						"description":"The line that should be displayed. For example 'S21'."
 					},
 					"destination":{
+                        "title": "destination",
 						"type":"string",
-						"required":true,
 						"description":"The name of the destination station that should be displayed."
 					},
 					"via":{
+                        "title": "via",
 						"type":"array",
-						"required":false,
 						"description":"(optional) The via stations that should be displayed.",
 						"items": {
-							"type":"string",
-							"minItems":0
+                            "title": "viaStation",
+							"type":"string"
 						}
 					},
 					"trainNumber":{
+                        "title": "trainNumber",
 						"type":"string",
-						"required":false,
 						"description":"The number of the train. This may contain alphanumeric symbols and dots."
 					}
 				}
 			},
 			"showNote":{
+                "title": "showNote",
 				"type":"object",
 				"description": "Can be used to display a predefined text with a predefined title on the TFT devices.",
+                "required": ["name", "type", "channels", "text"],
 				"properties":{
 					"name": {
-						"default": "showNote",
-						"required":true
+                        "title": "name",
+						"enum": "showNote"
 					},
 					"type": {
+                        "title": "type",
 						"enum":["notice", "alert"],
-						"required":true,
 						"description": "When the type is notice, this will be cause usually displaying the announcement's title with a blue background, this is mainly used for operational informations. When the type is alert, the title's background will be red, this is mainly used for disruption informations."
 					},
 					"channels": {
+                        "title": "channels",
 						"type":"array",
-						"required":true,
 						"description":"The output channels on which this command will be executed. For example: ['display_interior.pis']",
+                        "minItems": 1,
 						"items": {
-							"type":"string",
-							"minItems":1
+                            "title": "channel",
+							"type":"string"
 						}
 					},
 					"text": {
+                        "title": "text",
 						"type":"string",
-						"required":true,
 						"description":"The text that should be displayed."
 					}
 				}
 			},
 			"enqueueAlert":{
+                "title": "enqueueAlert",
 				"type":"object",
 				"description": "Can be used to simultaneously play a list audio files and to display the according information text on the TFTs ",
-				"properties":{
+				"required": ["name", "type", "autoCancel", "channels","announcements"],
+                "properties":{
 					"name": {
-						"default": "enqueueAlert",
-						"required":true
+                        "title": "name",
+						"enum": "enqueueAlert"
 					},
 					"type": {
+                        "title": "type",
 						"enum":["notice", "alert"],
-						"required":true,
 						"description": "When the type is notice, this will be cause usually displaying the announcement's title with a blue background, this is mainly used for operational informations. When the type is alert, the title's background will be red, this is mainly used for disruption informations."
 					},
 					"autoCancel": {
+                        "title": "autoCancel",
 						"default": "immediate",
-						"required":true,
 						"description":"Indicates that this command should immediately be canceled to not be observed as an active schedule command override"
 					},
 					"channels": {
+                        "title": "channels",
 						"type":"array",
-						"required":true,
 						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+                        "minItems": 1,
 						"items": {
-							"type":"string",
-							"minItems":1
+                            "title": "channel",
+							"type":"string"
 						}
 					},
 					"announcements": {
+                        "title": "announcements",
 						"type":"array",
 						"description":"A list of announcements that should be played in order. This can be a list of localized announcements.",
-						"required":true,
-						"items": [{
+                        "minItems":1,
+						"items": {
+                            "title": "announcement",
 							"type":"object",
 							"description": "The announcement object properties.",
-							"required":true,
+							"required":["title", "text", "files"],
 							"properties": {
 								"title": {
+                                    "title": "title",
 									"type": "string",
-									"required": true,
 									"description": "The title of the announcement that should be displayed on the displays."
 								},
 								"text": {
+                                    "title": "text",
 									"type": "string",
-									"required": true,
 									"description": "The visual text of the announcement that should be displayed on the displays."
 								},
 								"files": {
+                                    "title": "files",
 									"type":"array",
-									"required":true,
 									"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
 									"items":{
+                                        "title": "fileName",
 										"type":"string",
 										"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
 									}
 								}
 							}
-						}]
+						}
 					}
 				}
 			},
 			"enqueueFiles":{
+                "title": "enqueueFiles",
 				"type":"object",
 				"description": "Can be used to play a list audio files.",
+                "required": ["channels","playList"],
 				"properties":{
 					"name": {
-						"default": "enqueueFiles"
+                        "title": "name",
+						"enum": "enqueueFiles"
 					},
 					"channels": {
+                        "title": "channels",
 						"type":"array",
-						"required":true,
 						"description":"The output channels on which this command will be executed. For example: ['audio_interior.pis', 'audio_exterior.pis']",
+                        "minItems": 1,
 						"items": {
-							"type":"string",
-							"minItems":1
+                            "title": "channel",
+							"type": "string"
 						}
 					},
 					"playList": {
+                        "title": "playList",
 						"type":"array",
-						"required":true,
 						"description":"A list of files that should be played in order. These files may only be text-fragments that form a complete sentence when played one after another.",
-						"items":{
+						"minItems": 1,
+                        "items":{
+                            "title": "fileName",
 							"type":"string",
 							"description":"A filename that should be played. This has to match with the filePath of one file in the files array of the schedule."
 						}
